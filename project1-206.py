@@ -12,16 +12,16 @@ def getData(file):
 	info_list = []
 	
 	for line in datalines[0:]:
-		newdictonary = {}
+		newdict = {}
 		values = line.split(',')
 		
-		newdictionary[settopline[0]] = values[0] #first name
-		newdictionary[settopline[1]] = values[1] #last name
-		newdictionary[settopline[2]] = values[2] #email
-		newdictionary[settopline[3]] = values[3] #Class
-		newdictionary[settopline[4]] = values[4] #date of birth
+		newdict[settopline[0]] = values[0] #first name
+		newdict[settopline[1]] = values[1] #last name
+		newdict[settopline[2]] = values[2] #email
+		newdict[settopline[3]] = values[3] #Class
+		newdict[settopline[4]] = values[4] #date of birth
 		
-		if newdictionary not in info_list:
+		if newdict not in info_list:
 			info_list.append(newdict)	
 	filenew.close()	
 	return info_list
@@ -104,16 +104,17 @@ def findMonth(a):
 	pass
 
 def mySortPrint(a,col,fileName):
-	output = open(str(fileName), "w")
-	sortedlist = sorted(a, key = lambda i: i[col])
-	for student in sortedlist:
-		first = student["First"]
-		last = student["Last"]
-		email = student["Email"]
-	
-	return(first + "," + last + "," + email)
+	file = open(fileName, 'w')
 
-	output.close()
+	data_list = sorted(a, key=lambda k: k[col])
+
+	for col in data_list:
+		first = col['First']
+		last = col['Last']
+		email = col['Email']
+		file.write(first + ',' + last + ',' + email + '\n')
+
+	file.close()
 #Similar to mySort, but instead of returning single
 #Student, the sorted data is saved to a csv file.
 # as fist,last,email
@@ -128,22 +129,19 @@ def findAge(a):
 	current = date.today()
 	for entry in a:
 		dates = entry["DOB\n"].split("/")
-		age = (current.year - int(dates[2])
+		age = (current.year - int(dates[2]))
 		age_count.append(age)
 
 	print(age_count)
 		#for dates in a:
-		pass
+	pass
 
 # def findAge(a):
 # Input: list of dictionaries
 # Output: Return the average age of the students and round that age to the nearest
 # integer.  You will need to work with the DOB and the current date to find the current
 # age in years.
-
-	
-
-
+ 
 ################################################################
 ## DO NOT MODIFY ANY CODE BELOW THIS
 ################################################################
